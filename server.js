@@ -1,14 +1,19 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser');
+
 var port = process.env.PORT || 8080
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
 
-const handler = require('./index').handler
+const chatfuelHandler = require('./index').handler
 
-app.get('/', function (req, res) {
+app.post('/', function (req, res) {
   // match AWS lambda style
-  handler(req, {}, function(event, context) {
+  chatfuelHandler(req, {}, function(event, context) {
     res.status(context.statusCode).send(context.body)
-  });
+  })
 })
 
 app.listen(port, function () {

@@ -5,7 +5,7 @@ const querystring = require('querystring');
 module.exports = {
   handler(event, context, callback) {
     const config = event.queryStringParameters || event.query;
-    const body = querystring.parse(event.body);
+    const body = event.body || querystring.parse(event.body);
 
     const sheetId = config.sheet_id;
     const rows = createRows(config, body);
