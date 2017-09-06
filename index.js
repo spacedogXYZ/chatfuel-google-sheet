@@ -4,7 +4,7 @@ const querystring = require('querystring');
 
 module.exports = {
   handler(event, context, callback) {
-    const config = event.queryStringParameters;
+    const config = event.queryStringParameters || event.query;
     const body = querystring.parse(event.body);
 
     const sheetId = config.sheet_id;
