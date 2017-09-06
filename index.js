@@ -7,10 +7,10 @@ module.exports = {
     const config = event.queryStringParameters;
     const body = querystring.parse(event.body);
 
-    const sheetId = config.id;
+    const sheetId = config.sheet_id;
     const rows = createRows(config, body);
 
-    if (!sheetId) return callback(null, { statusCode: 200, body: 'Specify a spreadsheet with ?id=xxx' });
+    if (!sheetId) return callback(null, { statusCode: 200, body: 'Specify a spreadsheet with ?sheet_id=xxx' });
 
     sheet.append(sheetId, rows, (error) => {
       if (error) console.error(error);
